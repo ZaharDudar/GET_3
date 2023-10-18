@@ -27,6 +27,13 @@ def sar_adc():
     
     return int(''.join([str(i) for i in bin_val]), base=2)
 
+def s_adc():
+    for v in range(256):
+        GPIO.output(DAC,dec2bin(v))
+        time.sleep(0.005)
+        if GPIO.input(comp)==1:
+            return v
+            
 try:
     while(True):
         num_leds=int((sar_adc()+3)/256 * 8)
